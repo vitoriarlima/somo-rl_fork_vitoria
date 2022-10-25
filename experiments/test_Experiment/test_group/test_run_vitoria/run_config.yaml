@@ -23,4 +23,3 @@ seed: 0
 torque_multiplier: 65
 training_timesteps: 10000000
 run_started: False
-run_started: True

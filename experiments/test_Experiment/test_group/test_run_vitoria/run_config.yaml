@@ -1,0 +1,26 @@
+action_time: 0.01
+alg: PPO
+bullet_time_step: 0.0002
+checkpoint_cb:
+  save_freq: 10000
+env_id: InHandManipulation-v0
+eval_cb:
+  eval_freq: 50000
+  n_eval_episodes: 1
+failure_penalty_multiplier: 100
+max_episode_steps: 1000
+max_torque_rate: 130
+num_threads: 4
+observation_flags:
+  box_or: null
+  box_pos: null
+  torques: null
+policy: PPOMlpPolicy
+reward_flags:
+  position: -5
+  z_rotation: 10
+seed: 0
+torque_multiplier: 65
+training_timesteps: 10000000
+run_started: False
+run_started: True

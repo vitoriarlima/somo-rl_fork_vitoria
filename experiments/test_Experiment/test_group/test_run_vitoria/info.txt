@@ -1,0 +1,9 @@
+_____________________________________
+TRAINING RUN INFO:
+- Run ID: ['test_Experiment', 'test_group', 'test_run_vitoria']
+- PID: 418458
+- Start Datetime: 10/25/2022 12:51:11
+- Git Commit Hash: 49e8dbfbd3f52467661a05bb525d761473c49094
+_____________________________________
+NOTES ON EXPERIMENT:
+- 

@@ -340,7 +340,7 @@ num_threads: 4
 observation_flags:
   box_or: null
   box_pos: null
-  torques: null
+  applied_input_torques: null
 policy: PPOMlpPolicy
 reward_flags:
   position: -5
@@ -349,7 +349,10 @@ seed: 0
 torque_multiplier: 65
 training_timesteps: 10000000
 ```
-
+**TO NOTE: Important for your `run_config.yaml`**
+In the example above you will have to manually change:
+- the name of the environment you are using under `env_id` among: `env_id: AntipodalGripper-v0`, `env_id: InHandManipulationInverted-v0`, `env_id: PenSpinner-v0`, `env_id: PlanarBlockPushing-v0`, `env_id: PlanarReaching-v0`, `env_id: PlanarReachingObstacle-v0`, `env_id: SnakeLocomotionDiscrete-v0`
+- the variables you want to store under the option `observation_flags`. You will find these in the .py file of the environment you are using under the method `get_observation` and the if statements where these are declared. They will be slightly different according to the different environment, these however usualy are: `box_pos`, `box_or`, `box_velocity`, `box_positions`, `velocities`, `tip_pos`, `angles`, `curvatures`, `applied_input_torques` and more depending on the environment. In this config file you can hence nicely select which information to store among these variables, without waisting memory on information you are not interested in.
 Now your new training run is set up!
 
 ### Executing a Training Run

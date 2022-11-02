@@ -1,7 +1,6 @@
 import os
 import sys
 import argparse
-from copy import deepcopy
 from pathlib import Path
 
 import matplotlib.pyplot as plt
@@ -11,9 +10,9 @@ import pandas as pd
 path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
 sys.path.insert(0, path)
 
-from user_settings import EXPERIMENT_ABS_PATH
+from somo_rl.user_settings import EXPERIMENT_ABS_PATH
 
-
+# print("PATH", EXPERIMENT_ABS_PATH )
 class Process_reward_data:
     def __init__(self, exp_abs_path, run_ID):
         self.run_ID = run_ID
@@ -21,12 +20,13 @@ class Process_reward_data:
         for subdivision in self.run_ID:
             self.run_dir = self.run_dir / subdivision
         self.monitoring_dir = self.run_dir / "monitoring"
-        self.reward_plots_dir = self.run_dir / "results" / "reward_plots"
+        self.reward_plots_dir = self.run_dir / "results_training" / "reward_plots"
         os.makedirs(self.reward_plots_dir, exist_ok=True)
         self.monitoring_means_path = self.monitoring_dir / "monitoring_means.pkl"
         self.monitoring_stds_path = self.monitoring_dir / "monitoring_stds.pkl"
 
     def process_monitor_data(self):
+        # Calculating std of the `monitor` files
 
         monitor_files = list(
             filter(

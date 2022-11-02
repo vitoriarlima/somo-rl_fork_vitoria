@@ -14,8 +14,9 @@ import pandas as pd
 path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
 sys.path.insert(0, path)
 
-from user_settings import EXPERIMENT_ABS_PATH
-from somo_rl.post_processing.process_run_reward import Process_reward_data
+from somo_rl.user_settings import EXPERIMENT_ABS_PATH
+# from somo_rl.post_processing.process_run_reward import Process_reward_data
+from somo_rl.post_processing.process_train_run_reward import Process_reward_data
 
 
 def plot_run_data(ax, x, y_df, color, linewidth=1, std_df=None):
@@ -25,7 +26,6 @@ def plot_run_data(ax, x, y_df, color, linewidth=1, std_df=None):
     ax.plot(x[:len(y)], y, color=color, linewidth=linewidth)[0]
     if std is not None:
         ax.fill_between(x[:len(y)], y - std, y + std, color=color, alpha=0.1)
-                
 def smooth_df_cols(df, window_size):
     smoothed_df = pd.DataFrame()
     for col in df:

@@ -1,8 +1,5 @@
 import os
-import platform
-import shutil
 import sys
-import time
 from datetime import datetime
 import argparse
 from copy import deepcopy
@@ -13,12 +10,10 @@ sys.path.insert(0, path)
 from somo_rl.utils.import_environment import import_env
 from somo_rl.utils import parse_config, construct_policy_model
 
-from user_settings import EXPERIMENT_ABS_PATH
+from somo_rl.user_settings import EXPERIMENT_ABS_PATH
 
-import csv
 import gym
 import json
-import matplotlib.pyplot as plt
 import numpy as np
 import pybullet as p
 from pathlib import Path
@@ -35,8 +30,17 @@ def extract_step_reward(prev_total_rewards, cur_total_rewards):
 class Policy_rollout:
     def __init__(self, exp_abs_path, run_ID, debug=False):
         self.run_ID = run_ID
-        self.run_dir = Path(exp_abs_path)
+        # print('RUN ID', run_ID)
+        #print('PATH', Path(exp_abs_path) )
+        # self.run_dir = Path(exp_abs_path)
+        self.run_dir = "/home/vitoria/Desktop/thesis_project_new1/somo-rl_fork_vitoria/experiments"
+        self.run_dir = Path(self.run_dir )
+        # print('TYPE OF SELF RUN', type(Path(self.run_dir )))
+        # print(self.run_dir )
+        # print('TYPE OF PATH EXP', type(Path(exp_abs_path) ))
+
         for subdivision in self.run_ID:
+            # print('SUBDIVISION', subdivision)
             self.run_dir = self.run_dir / subdivision
         run_config_file = self.run_dir / "run_config.yaml"
 
@@ -55,8 +59,8 @@ class Policy_rollout:
         self.checkpoints_callbacks_dir = self.run_dir / "callbacks" / "checkpoints"
         self.select_checkpoints_dir = self.models_dir / "select_checkpoints"
 
-        self.results_dir = self.run_dir / "results"
-        self.processed_data_dir = self.results_dir / "processed_data"
+        self.results_dir = self.run_dir / "results_rollout"
+        self.processed_data_dir = self.results_dir / "rollout_data"
         self.videos_dir = self.results_dir / "render_vids"
 
         now = datetime.now()

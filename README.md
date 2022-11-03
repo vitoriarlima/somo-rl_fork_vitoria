@@ -359,8 +359,12 @@ Now your new training run is set up!
 
 Note: currently, the SoMo-RL repo and SomoGym repo must be located in the same directory on your machine.
 
-1. Make a file `user_settings.py` in the base directory of this repo. Define the absolute path to your experiments directory as `EXPERIMENT_ABS_PATH`.
+1. Make a file `user_settings.py` in the base directory of `somo-rl/somo_rl`. Define the absolute path to your experiments directory as `EXPERIMENT_ABS_PATH`.
+
+   In this repo we provided an example of that in `somo-rl/somo_rl/user_settings.py` - however make sure to modify your `EXPERIMENT_ABS_PATH` accordingly, it will look something like `/home/your_user_name/.../somo-rl/experiments` 
 2. Prepare a run (and a run config) in your experiments directory (the same one your `EXPERIMENT_ABS_PATH` goes to).
+
+   To make this clear, we provided an example of this in `somo-rl/experiments/test_experiment/test_group/test_run/run_config.yaml`
 3. There are several command line arguments used in actually executing a run:
     - `exp_name` (`-e`): required, name of experiment in your experiments directory.
     - `run_group_name` (`-g`): required, name of run group within experiment.

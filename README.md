@@ -382,13 +382,72 @@ Note: currently, the SoMo-RL repo and SomoGym repo must be located in the same d
 
 Again, the difference between `train_policy.py` and `train_benchmark_policy.py` is that `train_benchmark_policy.py` will overwrite environment settings in your run_config with those found in the `benchmark_run_config.yaml` file in the SomoGym environment directory.
 
-### Running a trained policy: TODO
+#### Evaluating/plotting the rewards during training:
+
+To get the plots of the trained policy from above, run this script if you want the plot of a single run of your experiment.
+```commandline
+(venv) python process_train_run_reward.py -e test_experiment -g test_group -r test_run --save 
+```
+
+
+It will look something like this: this comes from running the experiment under `test_experiment/test_group_test_run_run_config.yaml` with InHandManipulation with PPO:
+
+![run_reward](assets/reward_single_experiment_run.png)
+
+
+To get the plots of the trained policy from above, run this script if you want the plot all the runs and all the groups of your entire experiment.
+```commandline
+(venv) python process_experiment_reward.py -e test_experiment -sg --plot_all_runs
+```
+
+
+It will look something like this: this comes from running the experiment under `test_experiment/test_group_test_run_run_config.yaml` with InHandManipulation with PPO:
+
+![eval_plot](assets/reward_whole_experiment.png)
+
+Each of the plots above cover the entire training history over 2 500 000 steps, i.e. roughtly 2500 episodes (1000 steps per episode).
+
+
+These plots will be stored in the directory `test_run/results_training/reward_plots`
+
+
+### Running a trained policy/Rolling out the policy: 
 
 After you've started training and have the final policy file (or a callback policy file), you can easily run a rollout of it in simulation to get a sense of its performance. This is done with `run_policy.py`, which has a number of command line args.
 
-### Postprocessing training data: TODO :disappointed:
+```
+ (venv) python run_policy.py -e test_train_experiment -g test_group -r test_run -s -v -sv 
+```
+...where `-s` stays for saving and `-v` for rendering the environment visually, and `-sv` for saving the video, this latter option does not work yet because the `render` method has not been implemented yet.
 
-Run `process_run_reward.py` or `process_experiment_reward.py`
+This is going to save data from the rollout in the directory `test_run/results_rollout` in the file subdirectory `rollout_data`. 
+In the directory `test_run/results_rollout/rollout_data` there will be a directory with the data saved every time you run the script above, i.e. every time you rollout the trained policy.
+
+#### Evaluating/plotting the rewards of the rolled out policy:
+
+To get the plots of the rolled out policy from above, run this script:
+```commandline
+(venv) opython process_rollout_eval_reward.py -e test_Experiment -g test_group -r test_run_vitoria --save 
+
+```
+
+These will be saved in the directory `test_run/results_rollout/reward_plots`.
+
+
+It will look something like this: this comes from running the experiment under `test_experiment/test_group_test_run_run_config.yaml` with InHandManipulation with PPO:
+
+![eval_plot](assets/rewards_plot_3runs.png)
+
+
+The plot above shows the rollot over 1 single episode, i.e. 1000 steps.
+
+
+TO NOTE: every time you run the `run_policy.py` script from above, new data will be stored in the directory `rollout_data`. Given this, the standard deviation of this plot the first time witll be none. After you run that script more times, and run the plotting script `process_rollout_eval_reward.py`, this will have a standard deviation across all the runs of the directory `rollout_data`.
+
+### Summarization:
+#### Training in Simulation -> deploying/rolling out in simulation --> deploying/rollint out in hardware
+
+[//]: # (Run `process_run_reward.py` or `process_experiment_reward.py`)
 
 ![summary_diagram](assets/summary-diagram.png)
 

@@ -310,7 +310,18 @@ The `postprocessing/` directory contains three modules for evaluating training a
 
 ## Basic Usage
 
-### Setting up a Training Run: writing a `run_config.yaml` file
+In this part of the documentation we will go over how to use this repo step by step.
+
+#### A. Setting up a Training Run: writing a `run_config.yaml` file
+#### B. Executing a Training Run: training a policy
+##### B.i - Evaluating/plotting the rewards during training:
+####  C. Running a trained policy/Rolling out the policy: 
+##### C.i - Evaluating/plotting the rewards of the rolled out policy:
+
+Here we will start going over all of these:
+
+
+### A. Setting up a Training Run: writing a `run_config.yaml` file
 
 To set up a training run, you need to create a run folder in the experiments directory and write a run config file.
 
@@ -355,7 +366,7 @@ In the example above you will have to manually change:
 - the variables you want to store under the option `observation_flags`. You will find these in the .py file of the environment you are using under the method `get_observation` and the if statements where these are declared. They will be slightly different according to the different environment, these however usualy are: `box_pos`, `box_or`, `box_velocity`, `box_positions`, `velocities`, `tip_pos`, `angles`, `curvatures`, `applied_input_torques` and more depending on the environment. In this config file you can hence nicely select which information to store among these variables, without waisting memory on information you are not interested in.
 Now your new training run is set up!
 
-### Executing a Training Run: training a policy
+### B. Executing a Training Run: training a policy
 
 Note: currently, the SoMo-RL repo and SomoGym repo must be located in the same directory on your machine.
 
@@ -389,7 +400,7 @@ Note: currently, the SoMo-RL repo and SomoGym repo must be located in the same d
 * `train_policy.py` will use your hand-written settings under `experiments/experiment_name/group_name/run_name/run_config.yaml`
 * `train_benchmark_policy.py`  will not use your own `run_config.yaml`, but rather it will overwrite environment settings in your `run_config` with those found in the `benchmark_run_config.yaml` file in the SomoGym environment directory.
 
-#### Evaluating/plotting the rewards during training:
+#### B.i - Evaluating/plotting the rewards during training:
 
 To get the plots of the trained policy from above, run this script if you want the plot of a single run of your experiment.
 ```commandline
@@ -418,7 +429,7 @@ Each of the plots above cover the entire training history over 2 500 000 steps, 
 These plots will be stored in the directory `test_run/results_training/reward_plots`
 
 
-### Running a trained policy/Rolling out the policy: 
+###  C. Running a trained policy/Rolling out the policy: 
 
 After you've started training and have the final policy file (or a callback policy file), you can easily run a rollout of it in simulation to get a sense of its performance. This is done with `run_policy.py`, which has a number of command line args.
 
@@ -430,7 +441,7 @@ After you've started training and have the final policy file (or a callback poli
 This is going to save data from the rollout in the directory `test_run/results_rollout` in the file subdirectory `rollout_data`. 
 In the directory `test_run/results_rollout/rollout_data` there will be a directory with the data saved every time you run the script above, i.e. every time you rollout the trained policy.
 
-#### Evaluating/plotting the rewards of the rolled out policy:
+#### C.i - Evaluating/plotting the rewards of the rolled out policy:
 
 To get the plots of the rolled out policy from above, run this script:
 ```commandline

@@ -310,7 +310,7 @@ The `postprocessing/` directory contains three modules for evaluating training a
 
 ## Basic Usage
 
-### Setting up a Training Run
+### Setting up a Training Run: writing a `run_config.yaml` file
 
 To set up a training run, you need to create a run folder in the experiments directory and write a run config file.
 
@@ -355,7 +355,7 @@ In the example above you will have to manually change:
 - the variables you want to store under the option `observation_flags`. You will find these in the .py file of the environment you are using under the method `get_observation` and the if statements where these are declared. They will be slightly different according to the different environment, these however usualy are: `box_pos`, `box_or`, `box_velocity`, `box_positions`, `velocities`, `tip_pos`, `angles`, `curvatures`, `applied_input_torques` and more depending on the environment. In this config file you can hence nicely select which information to store among these variables, without waisting memory on information you are not interested in.
 Now your new training run is set up!
 
-### Executing a Training Run
+### Executing a Training Run: training a policy
 
 Note: currently, the SoMo-RL repo and SomoGym repo must be located in the same directory on your machine.
 
@@ -364,7 +364,7 @@ Note: currently, the SoMo-RL repo and SomoGym repo must be located in the same d
    In this repo we provided an example of that in `somo-rl/somo_rl/user_settings.py` - however make sure to modify your `EXPERIMENT_ABS_PATH` accordingly, it will look something like `/home/your_user_name/.../somo-rl/experiments` 
 2. Prepare a run (and a run config) in your experiments directory (the same one your `EXPERIMENT_ABS_PATH` goes to).
 
-   To make this clear, we provided an example of this in `somo-rl/experiments/test_experiment/test_group/test_run/run_config.yaml`
+   To make this clear, we provided an example of this repository under `somo-rl/experiments/test_experiment/test_group/test_run/run_config.yaml`
 3. There are several command line arguments used in actually executing a run:
     - `exp_name` (`-e`): required, name of experiment in your experiments directory.
     - `run_group_name` (`-g`): required, name of run group within experiment.
@@ -384,7 +384,10 @@ Note: currently, the SoMo-RL repo and SomoGym repo must be located in the same d
     (venv) somo-rl tom$ python train_policy.py -e test_experiment -g test_group -r test_run -v -dl reward_components observations -o
     ```
 
-Again, the difference between `train_policy.py` and `train_benchmark_policy.py` is that `train_benchmark_policy.py` will overwrite environment settings in your run_config with those found in the `benchmark_run_config.yaml` file in the SomoGym environment directory.
+
+#### *Difference between `train_policy.py` and `train_benchmark_policy.py`* 
+* `train_policy.py` will use your hand-written settings under `experiments/experiment_name/group_name/run_name/run_config.yaml`
+* `train_benchmark_policy.py`  will not use your own `run_config.yaml`, but rather it will overwrite environment settings in your `run_config` with those found in the `benchmark_run_config.yaml` file in the SomoGym environment directory.
 
 #### Evaluating/plotting the rewards during training:
 

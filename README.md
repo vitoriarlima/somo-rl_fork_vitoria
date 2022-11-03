@@ -318,8 +318,15 @@ In this part of the documentation we will go over how to use this repo step by s
 ####  C. Running a trained policy/Rolling out the policy: 
 ##### C.i - Evaluating/plotting the rewards of the rolled out policy:
 
-Here we will start going over all of these:
 
+## Google Colab Demo Code
+Also, we created a google colab to make things more intuitive to get you started.
+Click on the banner below for a Demo of this SomoRL code in Google Colab.
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/107zpsD3X-K03bgv1Tp3s4Oz2LJUiNJHK?usp=sharing) 
+
+
+## Instructions to run locally
 
 ### A. Setting up a Training Run: writing a `run_config.yaml` file
 

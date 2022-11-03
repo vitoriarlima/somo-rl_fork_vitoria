@@ -14,7 +14,7 @@ num_threads: 4
 observation_flags:
   box_or: null
   box_pos: null
-  torques: null
+  applied_input_torques: null
 policy: PPOMlpPolicy
 reward_flags:
   position: -5
@@ -23,5 +23,3 @@ seed: 0
 torque_multiplier: 65
 training_timesteps: 10000000
 run_started: False
-
-run_started: True

@@ -402,6 +402,8 @@ Note: currently, the SoMo-RL repo and SomoGym repo must be located in the same d
 
 #### B.i - Evaluating/plotting the rewards during training:
 
+##### --> Plots of a single train run
+
 To get the plots of the trained policy from above, run this script if you want the plot of a single run of your experiment.
 ```commandline
 (venv) python process_train_run_reward.py -e test_experiment -g test_group -r test_run --save 
@@ -412,6 +414,7 @@ It will look something like this: this comes from running the experiment under `
 
 ![run_reward](assets/reward_single_experiment_run.png)
 
+##### --> Plots of a the whole experiment
 
 To get the plots of the trained policy from above, run this script if you want the plot all the runs and all the groups of your entire experiment.
 ```commandline
@@ -422,6 +425,8 @@ To get the plots of the trained policy from above, run this script if you want t
 It will look something like this: this comes from running the experiment under `test_experiment/test_group_test_run_run_config.yaml` with InHandManipulation with PPO:
 
 ![eval_plot](assets/reward_whole_experiment.png)
+
+##### --> Where are the plots stored
 
 Each of the plots above cover the entire training history over 2 500 000 steps, i.e. roughtly 2500 episodes (1000 steps per episode).
 

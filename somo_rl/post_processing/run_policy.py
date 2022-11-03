@@ -33,7 +33,7 @@ class Policy_rollout:
         # print('RUN ID', run_ID)
         #print('PATH', Path(exp_abs_path) )
         # self.run_dir = Path(exp_abs_path)
-        self.run_dir = "/home/vitoria/Desktop/thesis_project_new1/somo-rl_fork_vitoria/experiments"
+        self.run_dir = EXPERIMENT_ABS_PATH
         self.run_dir = Path(self.run_dir )
         # print('TYPE OF SELF RUN', type(Path(self.run_dir )))
         # print(self.run_dir )

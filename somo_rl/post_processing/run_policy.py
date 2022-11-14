@@ -10,7 +10,7 @@ sys.path.insert(0, path)
 from somo_rl.utils.import_environment import import_env
 from somo_rl.utils import parse_config, construct_policy_model
 
-from somo_rl.user_settings import EXPERIMENT_ABS_PATH
+from user_settings import EXPERIMENT_ABS_PATH
 
 import gym
 import json

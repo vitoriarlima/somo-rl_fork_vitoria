@@ -10,7 +10,7 @@ import pandas as pd
 path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
 sys.path.insert(0, path)
 
-from somo_rl.user_settings import EXPERIMENT_ABS_PATH
+from user_settings import EXPERIMENT_ABS_PATH
 
 # print("PATH", EXPERIMENT_ABS_PATH )
 class Process_reward_data:
@@ -148,8 +148,8 @@ def process_reward_data(
     plt.tight_layout()
 
     if save_figs:
-        plt.savefig(reward_data.reward_plots_dir / ("rewards_plot.png"))
-        plt.savefig(reward_data.reward_plots_dir / ("rewards_plot.eps"), format="eps")
+        plt.savefig(reward_data.reward_plots_dir / (f"rewards_plot_per_{x_units}.png"))
+        plt.savefig(reward_data.reward_plots_dir / (f"rewards_plot_per_{x_units}.eps"), format="eps")
 
     if show:
         plt.show()

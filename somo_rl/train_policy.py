@@ -8,7 +8,6 @@ from copy import deepcopy
 
 import argparse
 import numpy as np
-
 from pathlib import Path
 
 from stable_baselines3.common.vec_env import SubprocVecEnv
@@ -96,6 +95,8 @@ def make_env(
             if run_config["reward_flags"]:
                 reward_keywords = tuple(run_config["reward_flags"].keys())
             env = Monitor(env, str(log_file), info_keywords=reward_keywords)
+            env.reset(n_segments=run_config["num_links"])
+
         return env
 
     return _init

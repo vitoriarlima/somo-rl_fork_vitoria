@@ -14,7 +14,7 @@ import pandas as pd
 path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
 sys.path.insert(0, path)
 
-from somo_rl.user_settings import EXPERIMENT_ABS_PATH
+from user_settings import EXPERIMENT_ABS_PATH
 # from somo_rl.post_processing.process_run_reward import Process_reward_data
 from somo_rl.post_processing.process_train_run_reward import Process_reward_data
 

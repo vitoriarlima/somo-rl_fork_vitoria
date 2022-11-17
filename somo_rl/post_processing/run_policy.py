@@ -28,23 +28,20 @@ def extract_step_reward(prev_total_rewards, cur_total_rewards):
 
 
 class Policy_rollout:
-    def __init__(self, exp_abs_path, run_ID, debug=False):
+    def __init__(self, exp_abs_path, run_ID, debug=False, rollout_config_path = False, roll_config_path = None):
         self.run_ID = run_ID
-        # print('RUN ID', run_ID)
-        #print('PATH', Path(exp_abs_path) )
-        # self.run_dir = Path(exp_abs_path)
-        self.run_dir = EXPERIMENT_ABS_PATH
-        self.run_dir = Path(self.run_dir )
-        # print('TYPE OF SELF RUN', type(Path(self.run_dir )))
-        # print(self.run_dir )
-        # print('TYPE OF PATH EXP', type(Path(exp_abs_path) ))
+        if rollout_config_path == False:
+            self.run_dir = EXPERIMENT_ABS_PATH
+            self.run_dir = Path(self.run_dir )
+            for subdivision in self.run_ID:
+                # print('SUBDIVISION', subdivision)
+                self.run_dir = self.run_dir / subdivision
+            run_config_file = self.run_dir / "run_config.yaml"
 
-        for subdivision in self.run_ID:
-            # print('SUBDIVISION', subdivision)
-            self.run_dir = self.run_dir / subdivision
-        run_config_file = self.run_dir / "run_config.yaml"
-
-        self.run_config = parse_config.validate_config(run_config_file)
+            self.run_config = parse_config.validate_config(run_config_file)
+        else:
+            self.roll_config_path = roll_config_path
+            self.run_config = parse_config.validate_config(roll_config_path)
 
         # check if it's a benchmark config
         if "action_time" not in self.run_config:
@@ -74,7 +71,9 @@ class Policy_rollout:
             run_config=self.run_config,
             run_ID=run_ID,
             debug=debug,
+
         )
+        self.env.reset(n_segments=self.run_config["n_segments"])
 
 
     def set_model(self, model, from_callbacks=False):
@@ -250,10 +249,29 @@ class Policy_rollout:
 
 
 
-def run(exp_name, run_group_name, run_name, exp_abs_path=EXPERIMENT_ABS_PATH, debug=False, seed=None, save=False, model="best_model", from_callbacks=False, num_steps=None, run_render=True, save_vid=False, zero_action=False):
+def run(exp_name,
+        run_group_name,
+        run_name,
+        exp_abs_path=EXPERIMENT_ABS_PATH,
+        debug=False,
+        seed=None,
+        save=False,
+        model="best_model",
+        from_callbacks=False,
+        num_steps=None,
+        run_render=True,
+        save_vid=False,
+        zero_action=False,
+        rollout_config_path = False,
+        roll_config_path = None
+         ):
     run_ID = [exp_name, run_group_name, run_name]
     policy = Policy_rollout(
-        exp_abs_path=exp_abs_path, run_ID=run_ID, debug=debug
+        exp_abs_path=exp_abs_path,
+        run_ID=run_ID,
+        debug=debug,
+        rollout_config_path = rollout_config_path,
+        roll_config_path= roll_config_path
     )
     rollout_func = policy.run_and_save_rollout if save else policy.run_rollout
 
@@ -349,4 +367,15 @@ if __name__ == "__main__":
     arg = parser.parse_args()
     seed = int(arg.seed) if arg.seed is not None else None
     num_steps = int(arg.num_steps) if arg.num_steps is not None else None
-    run(exp_name=arg.exp_name, run_group_name=arg.run_group_name, run_name=arg.run_name, exp_abs_path=arg.exp_abs_path, debug=arg.debug, seed=seed, save=arg.save, model=arg.model,from_callbacks=not arg.not_from_callbacks, num_steps=num_steps, run_render=arg.render, save_vid=arg.save_vid, zero_action=arg.zero_action)
+    run(exp_name=arg.exp_name,
+        run_group_name=arg.run_group_name,
+        run_name=arg.run_name,
+        exp_abs_path=arg.exp_abs_path,
+        debug=arg.debug, seed=seed,
+        save=arg.save,
+        model=arg.model,
+        from_callbacks=not arg.not_from_callbacks,
+        num_steps=num_steps,
+        run_render=arg.render,
+        save_vid=arg.save_vid,
+        zero_action=arg.zero_action)

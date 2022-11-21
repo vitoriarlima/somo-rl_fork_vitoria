@@ -54,7 +54,7 @@ def make_env(
     env_id,
     run_config,
     max_episode_steps,
-    rank=0,
+    rank=None, #changed this
     run_ID=None,
     monitoring_dir=None,
     render=False,

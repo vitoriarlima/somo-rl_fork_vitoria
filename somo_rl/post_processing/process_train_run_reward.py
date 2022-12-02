@@ -205,7 +205,7 @@ if __name__ == "__main__":
         arg.run_group_name,
         arg.run_name,
         log_components=arg.log_components,
-        x_units="steps",
+        x_units="steps", #hours
         max_x_val=None,
         smoothed=arg.smoothed,
         show=True,

@@ -7,3 +7,4 @@ scikit-build==0.11.1
 sorotraj==0.14
 stable-baselines3[extra]
 pyquaternion
+git+https://github.com/graulem/somo@main#egg=somo
